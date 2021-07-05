@@ -7,7 +7,7 @@ interface ThemeProviderProps {
 }
 
 export const ToggleThemeContext = React.createContext({
-  toggleTheme: () => {
+  toggleTheme: () => { // method gets overridden
     console.log();
   },
   darkThemeActive: false,

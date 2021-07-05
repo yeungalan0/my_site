@@ -31,11 +31,10 @@ import { getSortedPostsSummaryData, PostData } from "../src/blog/lib/posts";
 import { blogStyles } from "../src/blog/styles/styles";
 import { DefaultLayout } from "../src/layout";
 import { fetcher, isEmpty } from "../src/utils";
+import { getQueryParams, validateQuery } from "./api/api-utils";
 import {
-  FilterKeys,
-  getQueryParams,
-  querySchema,
-  validateQuery,
+  PostSummaryFilterKeys,
+  postSummaryQuerySchema,
 } from "./api/post-summary-data";
 
 export async function getStaticProps(): Promise<{
@@ -66,7 +65,7 @@ export default function Blog({
   useEffect(() => {
     // Run initial query with params if there is any
     const queryParams = getQueryParams(router.query as NextApiRequest["query"]);
-    const queryErrors = validateQuery(queryParams, querySchema);
+    const queryErrors = validateQuery(queryParams, postSummaryQuerySchema);
 
     if (queryErrors.length > 0) {
       setErrors(queryErrors);
@@ -74,7 +73,7 @@ export default function Blog({
       // do nothing
     } else {
       tagsUpdatedRef.current = true;
-      setTags(queryParams[FilterKeys.TAGS] ?? []);
+      setTags(queryParams[PostSummaryFilterKeys.TAGS] ?? []);
     }
   }, [router.query]);
 

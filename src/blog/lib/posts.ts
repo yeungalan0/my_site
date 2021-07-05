@@ -2,7 +2,8 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { FilterKeys, QueryParams } from "../../../pages/api/post-summary-data";
+import { PostSummaryFilterKeys } from "../../../pages/api/post-summary-data";
+import { QueryParams } from "../../../pages/api/api-utils";
 import { VALID_TAGS } from "../constants";
 
 const postsDirectory = path.join(process.cwd(), "posts");
@@ -55,8 +56,8 @@ function applyFilters(
 ): PostData[] {
   return allPostsData.filter((postData) => {
     let meetsFilterCriteria = true;
-    if (FilterKeys.TAGS in queryParams) {
-      const containsFilterTags = queryParams[FilterKeys.TAGS].every((tag) =>
+    if (PostSummaryFilterKeys.TAGS in queryParams) {
+      const containsFilterTags = queryParams[PostSummaryFilterKeys.TAGS].every((tag) =>
         postData.tags.includes(tag)
       );
       meetsFilterCriteria = containsFilterTags;

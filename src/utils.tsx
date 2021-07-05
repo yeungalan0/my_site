@@ -1,3 +1,5 @@
+import { Logger, TLogLevelName } from "tslog";
+
 export function isEmpty(obj: any): boolean {
   return Object.keys(obj).length === 0;
 }
@@ -22,3 +24,7 @@ export async function fetcher(url: string) {
 
   return res.json();
 }
+
+export const log: Logger = new Logger({
+  minLevel: (process.env.LOG_LEVEL as TLogLevelName) ?? "info",
+});

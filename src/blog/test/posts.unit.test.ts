@@ -1,4 +1,4 @@
-import { QueryParams } from "../../../pages/api/post-summary-data";
+import { QueryParams } from "../../../pages/api/api-utils";
 import { testables, PostData } from "../lib/posts";
 
 const { applyFilters, getSnippet } = testables;

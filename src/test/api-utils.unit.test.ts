@@ -1,0 +1,84 @@
+import {
+  PostSummaryFilterKeys,
+  postSummaryQuerySchema,
+} from "../../pages/api/post-summary-data";
+import { QueryParams, validateQuery } from "../../pages/api/api-utils";
+import { VALID_TAGS } from "../blog/constants";
+
+describe("validateQuery", () => {
+  test("should return no errors on valid query", () => {
+    const expectedOutput: Error[] = [];
+    const testCase: QueryParams = {
+      [PostSummaryFilterKeys.TAGS]: [
+        VALID_TAGS[0],
+        VALID_TAGS[1],
+        VALID_TAGS[2],
+      ],
+    };
+
+    const actualOutput = validateQuery(testCase, postSummaryQuerySchema);
+
+    expect(actualOutput).toStrictEqual(expectedOutput);
+  });
+
+  test("should return no errors on valid query with requiredKeys", () => {
+    const expectedOutput: Error[] = [];
+    const testCase: QueryParams = {
+      [PostSummaryFilterKeys.TAGS]: [
+        VALID_TAGS[0],
+        VALID_TAGS[1],
+        VALID_TAGS[2],
+      ],
+    };
+    const requiredKeys = [PostSummaryFilterKeys.TAGS];
+
+    const actualOutput = validateQuery(
+      testCase,
+      postSummaryQuerySchema,
+      requiredKeys
+    );
+
+    expect(actualOutput).toStrictEqual(expectedOutput);
+  });
+
+  test("should return errors on invalid query value", () => {
+    const expectedErrorNumber = 1;
+    const testCase: QueryParams = {
+      [PostSummaryFilterKeys.TAGS]: [VALID_TAGS[0], "invalid", VALID_TAGS[2]],
+    };
+
+    const actualOutput = validateQuery(testCase, postSummaryQuerySchema);
+
+    expect(actualOutput.length).toStrictEqual(expectedErrorNumber);
+  });
+
+  test("should return errors on invalid key value", () => {
+    const expectedErrorNumber = 1;
+    const testCase: QueryParams = {
+      [PostSummaryFilterKeys.TAGS]: [
+        VALID_TAGS[0],
+        VALID_TAGS[1],
+        VALID_TAGS[2],
+      ],
+      invalid: ["testing"],
+    };
+
+    const actualOutput = validateQuery(testCase, postSummaryQuerySchema);
+
+    expect(actualOutput.length).toStrictEqual(expectedErrorNumber);
+  });
+
+  test("should return error on query without requiredKey", () => {
+    const expectedErrorNumber = 1;
+    const testCase: QueryParams = {};
+    const requiredKeys = [PostSummaryFilterKeys.TAGS];
+
+    const actualOutput = validateQuery(
+      testCase,
+      postSummaryQuerySchema,
+      requiredKeys
+    );
+
+    expect(actualOutput.length).toStrictEqual(expectedErrorNumber);
+  });
+});
