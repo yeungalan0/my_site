@@ -17,7 +17,7 @@ export enum PickerFilterKeys {
 
 const RADIUS_UPPER_LIMIT = 50000;
 const RADIUS_LOWER_LIMIT = 0;
-const ALLOWED_TYPES = ["restaurant"];
+export const VALID_TYPES = ["restaurant"];
 const REQUIRED_KEYS = [PickerFilterKeys.LOCATION, PickerFilterKeys.TYPE];
 
 export const pickerQuerySchema: schema = {
@@ -35,7 +35,7 @@ export const pickerQuerySchema: schema = {
   [PickerFilterKeys.TYPE]: (value: string[]) => {
     if (value.length !== 1) return false;
 
-    return ALLOWED_TYPES.includes(value[0]);
+    return VALID_TYPES.includes(value[0]);
   },
 
   [PickerFilterKeys.RADIUS]: (value: string[]) => {
@@ -83,5 +83,8 @@ async function getNearbyPlaces(queryParams: QueryParams) {
   if (radius !== undefined) url.searchParams.append("radius", radius);
   if (keyword !== undefined) url.searchParams.append("keyword", keyword);
 
-  return await getFromApi<google.maps.places.PlaceResult>(url.toString());
+  return await getFromApi<google.maps.places.PlaceResult[]>(
+    url.toString(),
+    "results" // unwrap the "results" parameter
+  );
 }

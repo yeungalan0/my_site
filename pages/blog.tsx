@@ -31,7 +31,11 @@ import { getSortedPostsSummaryData, PostData } from "../src/blog/lib/posts";
 import { blogStyles } from "../src/blog/styles/styles";
 import { DefaultLayout } from "../src/layout";
 import { fetcher, isEmpty } from "../src/utils";
-import { getQueryParams, validateQuery } from "./api/api-utils";
+import {
+  buildQueryString,
+  getQueryParams,
+  validateQuery,
+} from "./api/api-utils";
 import {
   PostSummaryFilterKeys,
   postSummaryQuerySchema,
@@ -115,7 +119,7 @@ function PostsList({
   const { data, error } = useSWR<PostData[], Error>(
     () =>
       tagsUpdatedRef.current
-        ? `/api/post-summary-data?${buildTagsQuery(tags)}`
+        ? `/api/post-summary-data?${buildQueryString({ tags: tags })}`
         : null,
     fetcher
   );
@@ -210,12 +214,4 @@ function FilterByTags({
       </Select>
     </FormControl>
   );
-}
-
-function buildTagsQuery(tags: string[]): string {
-  return tags
-    .map((tag) => {
-      return `tags=${encodeURIComponent(tag)}`;
-    })
-    .join("&");
 }

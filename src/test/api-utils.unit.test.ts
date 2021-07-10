@@ -2,7 +2,11 @@ import {
   PostSummaryFilterKeys,
   postSummaryQuerySchema,
 } from "../../pages/api/post-summary-data";
-import { QueryParams, validateQuery } from "../../pages/api/api-utils";
+import {
+  buildQueryString,
+  QueryParams,
+  validateQuery,
+} from "../../pages/api/api-utils";
 import { VALID_TAGS } from "../blog/constants";
 
 describe("validateQuery", () => {
@@ -81,4 +85,29 @@ describe("validateQuery", () => {
 
     expect(actualOutput.length).toStrictEqual(expectedErrorNumber);
   });
+});
+
+describe("buildQueryString", () => {
+  it.each([
+    [
+      { tags: ["finance", "tech", "values"] },
+      "tags=finance&tags=tech&tags=values",
+    ],
+    [
+      {
+        location: ["123,456"],
+        type: ["restaurant"],
+        radius: ["200"],
+      },
+      "location=123%2C456&type=restaurant&radius=200",
+    ],
+    [{ foo: ["a", "b", "c"], bar: ["d"] }, "foo=a&foo=b&foo=c&bar=d"],
+  ])(
+    "buildQueryString tests - input: %s, expected output: %s",
+    (testCase, expectedOutput) => {
+      const actualOutput = buildQueryString(testCase);
+
+      expect(actualOutput).toStrictEqual(expectedOutput);
+    }
+  );
 });

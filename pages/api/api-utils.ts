@@ -17,6 +17,21 @@ export function getQueryParams(query: NextApiRequest["query"]): QueryParams {
   return queryParams;
 }
 
+export function buildQueryString(queryParams: QueryParams) {
+  let queryString = "";
+
+  Object.entries(queryParams).forEach(([key, values]) => {
+    values.forEach(
+      (value) =>
+        (queryString = queryString
+          ? `${queryString}&${key}=${encodeURIComponent(value)}`
+          : `${key}=${encodeURIComponent(value)}`)
+    );
+  });
+
+  return queryString;
+}
+
 /**
  * Schema definition where the key is an expected query key, and the value is
  * a boolean determined by validating the query value
@@ -60,11 +75,21 @@ export function validateQuery(
     .map((key) => new Error(`Key: '${key}' or associated value(s) is invalid`));
 }
 
-export async function getFromApi<T>(url: string): Promise<T> {
+export async function getFromApi<T>(
+  url: string,
+  unwrapParam?: string
+): Promise<T> {
   return fetch(url).then((response) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    return response.json() as Promise<T>;
+
+    if (!unwrapParam) {
+      return response.json() as Promise<T>;
+    } else {
+      return (response.json() as Promise<{ [wrapParam: string]: T }>).then(
+        (data) => data[unwrapParam]
+      );
+    }
   });
 }

@@ -71,7 +71,7 @@ export default function CoupleGame(): JSX.Element {
 
   return (
     <Fragment>
-      <DefaultGridLayout
+      <DefaultGridLayout // Can't use DefaultLayout because of the extra AppBar
         title={
           <Grid item>
             <Typography variant="h4" align="center" className={classes.title}>
