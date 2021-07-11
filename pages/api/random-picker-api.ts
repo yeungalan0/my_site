@@ -18,7 +18,7 @@ export enum PickerFilterKeys {
 const RADIUS_UPPER_LIMIT = 50000;
 const RADIUS_LOWER_LIMIT = 0;
 export const VALID_TYPES = ["restaurant"];
-const REQUIRED_KEYS = [PickerFilterKeys.LOCATION, PickerFilterKeys.TYPE];
+export const REQUIRED_KEYS = [PickerFilterKeys.LOCATION, PickerFilterKeys.TYPE];
 
 export const pickerQuerySchema: schema = {
   [PickerFilterKeys.LOCATION]: (value: string[]) => {
