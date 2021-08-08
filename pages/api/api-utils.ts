@@ -1,3 +1,4 @@
+import { Client } from "@googlemaps/google-maps-services-js";
 import { NextApiRequest } from "next";
 
 export type QueryParams = {
@@ -81,7 +82,9 @@ export async function getFromApi<T>(
 ): Promise<T> {
   return fetch(url).then((response) => {
     if (!response.ok) {
-      throw new Error(response.statusText);
+      throw new Error(
+        `Response code: ${response.status}, Response text: ${response.statusText}, Url: ${url}`
+      );
     }
 
     if (!unwrapParam) {
@@ -93,3 +96,5 @@ export async function getFromApi<T>(
     }
   });
 }
+
+export const googleMapsClient = new Client();

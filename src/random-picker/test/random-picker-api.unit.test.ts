@@ -1,7 +1,7 @@
 import {
-  PickerFilterKeys,
-  pickerQuerySchema,
-} from "../../../pages/api/random-picker-api";
+  NearbyFilterKeys,
+  nearbyQuerySchema,
+} from "../../../pages/api/places-nearby";
 
 describe("pickerQuerySchema", () => {
   it.each([
@@ -14,7 +14,7 @@ describe("pickerQuerySchema", () => {
   ])(
     "location tests - input: %s, expected out: %s",
     (testCase, expectedOutput) => {
-      const actualOutput = pickerQuerySchema[PickerFilterKeys.LOCATION](
+      const actualOutput = nearbyQuerySchema[NearbyFilterKeys.LOCATION](
         testCase
       );
 
@@ -28,7 +28,7 @@ describe("pickerQuerySchema", () => {
     [[""], false],
     [["123"], false],
   ])("type tests - input: %s, expected out: %s", (testCase, expectedOutput) => {
-    const actualOutput = pickerQuerySchema[PickerFilterKeys.TYPE](testCase);
+    const actualOutput = nearbyQuerySchema[NearbyFilterKeys.TYPE](testCase);
 
     expect(actualOutput).toStrictEqual(expectedOutput);
   });
@@ -44,7 +44,7 @@ describe("pickerQuerySchema", () => {
   ])(
     "radius tests - input: %s, expected out: %s",
     (testCase, expectedOutput) => {
-      const actualOutput = pickerQuerySchema[PickerFilterKeys.RADIUS](testCase);
+      const actualOutput = nearbyQuerySchema[NearbyFilterKeys.RADIUS](testCase);
 
       expect(actualOutput).toStrictEqual(expectedOutput);
     }
