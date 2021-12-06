@@ -29,7 +29,7 @@ export default function About(): JSX.Element {
             onClick={() => window.open("https://github.com/yeungalan0")}
             className={classes.siteIconButton}
           >
-            <GitHubIcon className={classes.siteIcon} />
+            <GitHubIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="LinkedIn">
@@ -40,7 +40,7 @@ export default function About(): JSX.Element {
             }
             className={classes.siteIconButton}
           >
-            <LinkedInIcon className={classes.siteIcon} />
+            <LinkedInIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="StackOverflow">
@@ -51,7 +51,7 @@ export default function About(): JSX.Element {
             }
             className={classes.siteIconButton}
           >
-            <ReorderIcon className={classes.siteIcon} />
+            <ReorderIcon />
           </IconButton>
         </Tooltip>
       </Box>
