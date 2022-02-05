@@ -1,7 +1,7 @@
 describe("Theme", () => {
   it("should be togglable", () => {
-    const darkThemeColor = "rgb(48, 48, 48)";
-    const lightThemeColor = "rgb(250, 250, 250)";
+    const darkThemeColor = "rgb(18, 18, 18)";
+    const lightThemeColor = "rgb(255, 255, 255)";
 
     // Clear theme when starting test
     cy.clearLocalStorage().should((ls) => {

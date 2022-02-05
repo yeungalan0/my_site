@@ -1,9 +1,13 @@
-export function isEmpty(obj: any): boolean {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function isEmpty(obj: object): boolean {
   return Object.keys(obj).length === 0;
 }
 
-export async function fetcher(url: string) {
-  const res = await fetch(url);
+export async function fetcher(
+  url: string,
+  requestInit: RequestInit | undefined
+): Promise<unknown> {
+  const res = await fetch(url, requestInit);
 
   // If the status code is not in the range 200-299,
   // we still try to parse and throw it.
