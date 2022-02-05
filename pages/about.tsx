@@ -28,7 +28,8 @@ export default function About(): JSX.Element {
             aria-label="GitHub"
             onClick={() => window.open("https://github.com/yeungalan0")}
             className={classes.siteIconButton}
-            size="large">
+            size="large"
+          >
             <GitHubIcon />
           </IconButton>
         </Tooltip>
@@ -39,7 +40,8 @@ export default function About(): JSX.Element {
               window.open("https://www.linkedin.com/in/alanyeung0/")
             }
             className={classes.siteIconButton}
-            size="large">
+            size="large"
+          >
             <LinkedInIcon />
           </IconButton>
         </Tooltip>
@@ -50,7 +52,8 @@ export default function About(): JSX.Element {
               window.open("https://stackoverflow.com/users/5910564/alan-yeung")
             }
             className={classes.siteIconButton}
-            size="large">
+            size="large"
+          >
             <ReorderIcon />
           </IconButton>
         </Tooltip>
