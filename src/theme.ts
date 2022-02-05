@@ -1,9 +1,9 @@
-import { createTheme, ThemeOptions } from "@material-ui/core/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
 
 function getThemeOptions(darkThemeActive: boolean): ThemeOptions {
   return {
     palette: {
-      type: darkThemeActive ? "dark" : "light",
+      mode: darkThemeActive ? "dark" : "light",
     },
   };
 }

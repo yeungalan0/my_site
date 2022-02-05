@@ -1,4 +1,4 @@
-import { Box, IconButton, Tooltip, Typography } from "@material-ui/core";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { DefaultLayout } from "../src/layout";
 import { useStyles } from "../src/style";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -28,7 +28,7 @@ export default function About(): JSX.Element {
             aria-label="GitHub"
             onClick={() => window.open("https://github.com/yeungalan0")}
             className={classes.siteIconButton}
-          >
+            size="large">
             <GitHubIcon />
           </IconButton>
         </Tooltip>
@@ -39,7 +39,7 @@ export default function About(): JSX.Element {
               window.open("https://www.linkedin.com/in/alanyeung0/")
             }
             className={classes.siteIconButton}
-          >
+            size="large">
             <LinkedInIcon />
           </IconButton>
         </Tooltip>
@@ -50,7 +50,7 @@ export default function About(): JSX.Element {
               window.open("https://stackoverflow.com/users/5910564/alan-yeung")
             }
             className={classes.siteIconButton}
-          >
+            size="large">
             <ReorderIcon />
           </IconButton>
         </Tooltip>

@@ -11,9 +11,10 @@ import {
   ListItemText,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Typography,
   useTheme,
-} from "@material-ui/core";
+} from "@mui/material";
 import { NextApiRequest } from "next";
 import { useRouter } from "next/router";
 import {
@@ -118,7 +119,7 @@ function PostsList({
   const classes = blogStyles();
   let postData: PostData[] = allPostsData;
 
-  const { data, error } = useSWR<PostData[], Error>(
+  const { data, error } = useSWR<unknown, Error>(
     () =>
       tagsUpdatedRef.current
         ? `/api/post-summary-data?${buildTagsQuery(tags)}`
@@ -127,7 +128,7 @@ function PostsList({
   );
 
   if (data !== undefined) {
-    postData = data;
+    postData = data as PostData[]; // Just type cast here, this is coming from an owned API
   } else if (error) {
     return <div>failed to load: &quot;{error.message}&quot;</div>;
   } else if (tagsUpdatedRef.current && !data) {
@@ -187,7 +188,7 @@ function FilterByTags({
 }): JSX.Element {
   const classes = blogStyles();
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent<string[]>) => {
     tagsUpdatedRef.current = true;
     setTags(event.target.value as string[]);
   };

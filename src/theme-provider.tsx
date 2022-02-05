@@ -1,6 +1,16 @@
-import { CssBaseline, MuiThemeProvider, Theme } from "@material-ui/core";
+import {
+  CssBaseline,
+  ThemeProvider,
+  StyledEngineProvider,
+  Theme,
+} from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { darkTheme, lightTheme } from "./theme";
+
+declare module "@mui/styles/defaultTheme" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -66,10 +76,12 @@ export const CustomThemeProvider: React.FC<ThemeProviderProps> = ({
         darkThemeActive: !(selectedTheme.themeName === ThemeName.LIGHT_THEME),
       }}
     >
-      <MuiThemeProvider theme={selectedTheme.appliedTheme}>
-        <CssBaseline />
-        {children}
-      </MuiThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={selectedTheme.appliedTheme}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
+      </StyledEngineProvider>
     </ToggleThemeContext.Provider>
   );
 };

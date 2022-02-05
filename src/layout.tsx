@@ -8,9 +8,9 @@ import {
   Tooltip,
   Typography,
   useScrollTrigger,
-} from "@material-ui/core";
-import Brightness2Icon from "@material-ui/icons/Brightness2";
-import WbSunnyIcon from "@material-ui/icons/WbSunny";
+} from "@mui/material";
+import Brightness2Icon from "@mui/icons-material/Brightness2";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import Head from "next/head";
 import Link from "next/link";
 import { Fragment, ReactElement, useContext } from "react";
@@ -169,7 +169,8 @@ function ConditionalTitle({ title }: { title: string | null }): JSX.Element {
 function HideOnScroll({
   children,
 }: {
-  children: ReactElement<any, any> | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  children: ReactElement<any, any>;
 }) {
   const trigger = useScrollTrigger();
 
@@ -232,6 +233,8 @@ export function TopBar(): JSX.Element {
                 icon={<WbSunnyIcon fontSize="small" />}
                 checkedIcon={<Brightness2Icon fontSize="small" />}
                 color="default"
+                // Ignoring this per: https://github.com/mui-org/material-ui/issues/20160
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 inputProps={{ "data-cy": "top-bar-toggle-theme" }}
               />

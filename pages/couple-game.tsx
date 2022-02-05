@@ -8,8 +8,8 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import * as constants from "../src/couple-game/constants";
 import { DefaultGridLayout } from "../src/layout";
@@ -203,7 +203,7 @@ function CoupleGameBoard({ players }: { players: string[] }): JSX.Element {
   return (
     <div className={classes.content}>
       <Grid container direction="column">
-        <Grid container item justify="center" spacing={2}>
+        <Grid container item justifyContent="center" spacing={2}>
           {getPlayerStatCards(playerStats, turn)}
         </Grid>
         <Grid item>
@@ -213,12 +213,17 @@ function CoupleGameBoard({ players }: { players: string[] }): JSX.Element {
           container
           item
           alignItems="center"
-          justify="center"
+          justifyContent="center"
           className={classes.cardGrid}
         >
           <CurrentCard card={card}></CurrentCard>
         </Grid>
-        <Grid container item justify="center" className={classes.pointButtons}>
+        <Grid
+          container
+          item
+          justifyContent="center"
+          className={classes.pointButtons}
+        >
           <PointButtons
             nextTurn={nextTurn}
             pointEarned={pointEarned}

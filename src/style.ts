@@ -1,9 +1,9 @@
-import { makeStyles } from "@material-ui/core";
+import makeStyles from "@mui/styles/makeStyles";
 import { darkTheme as theme } from "./theme";
 
 const useStyles = makeStyles(() => ({
   topic: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("lg")]: {
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1),
     },
